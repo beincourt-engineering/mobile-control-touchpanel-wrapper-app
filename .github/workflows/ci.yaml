@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - '**'
+# Asked for here rather than taken from the organization's default token permissions, which can be read-only: the
+# version step and the release write with the workflow's own token, and the build job asks for an id token. A called
+# job gets no more than this caller allows.
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   get_version:
     uses: ./.github/workflows/get-version.yaml
